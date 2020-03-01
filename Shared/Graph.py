@@ -8,6 +8,10 @@ class Graph(object):
     def addEdge(self, v1, v2):
         if v1 == v2:
             print("Already exists")
+            return
+        if v1 > self.size - 1 or v2 > self.size - 1:
+            print("Size of the graph exceeded")
+            return
         self.adjMatrix[v1][v2] = 1
         self.adjMatrix[v2][v1] = 1
 
