@@ -3,6 +3,10 @@ import random
 
 class Graph(object):
     def __init__(self, vertexes: int, edges: int):
+        """ Create a random graph with given params and print it's adjacency matrix
+        :param vertexes: number of vertexes in graph
+        :param edges: number of edges in graph
+        """
         self.adjMatrix = []
         for i in range(vertexes):
             self.adjMatrix.append([0 for i in range(vertexes)])
@@ -19,6 +23,10 @@ class Graph(object):
 
     # noinspection PyRedeclaration
     def __init__(self, vertexes: int, probability: float):
+        """Create a random graph with given params and print it's adjacency matrix
+        :param vertexes: number of vertexes in graph
+        :param probability:  probability that two vertexes are connected
+        """
         self.adjMatrix = []
         for i in range(vertexes):
             self.adjMatrix.append([0 for i in range(vertexes)])
@@ -34,6 +42,11 @@ class Graph(object):
         self.printAdjacencyMatrix()
 
     def addEdge(self, v1, v2):
+        """Create an edge between graph's two vertexes
+        :param v1: first vertex
+        :param v2: second vertex
+        :return: nothing
+        """
         if v1 == v2:
             print("Already exists")
             return
@@ -44,6 +57,11 @@ class Graph(object):
         self.adjMatrix[v2][v1] = 1
 
     def removeEdge(self, v1, v2):
+        """ Removes edge between two vertexes
+        :param v1: first vertex
+        :param v2: second vertex
+        :return:
+        """
         if self.adjMatrix[v1][v2] == 0:
             print("Nothing to delete")
             return
@@ -51,9 +69,16 @@ class Graph(object):
         self.adjMatrix[v2][v1] = 0
 
     def containsEdge(self, v1, v2):
+        """ Checks if graph contains an edge between two vertexes
+        :param v1: first vertex
+        :param v2: second vertex
+        :return: boolean
+        """
         return True if self.adjMatrix[v1][v2] > 0 else False
 
     def printAdjacencyMatrix(self):
+        """ Prints graph's adjacency matrix
+        """
         for row in self.adjMatrix:
             for val in row:
                 print("%d " % val, end='')
