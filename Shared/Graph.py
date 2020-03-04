@@ -1,9 +1,21 @@
+import random
+
+
 class Graph(object):
-    def __init__(self, size):
+    def __init__(self, vertexes: int, edges: int):
         self.adjMatrix = []
-        for i in range(size):
-            self.adjMatrix.append([0 for i in range(size)])
-        self.size = size
+        for i in range(vertexes):
+            self.adjMatrix.append([0 for i in range(vertexes)])
+        self.size = vertexes
+        v1 = 0
+        v2 = 0
+        for i in range(edges):
+            v1 = random.randint(0, vertexes - 1)
+            v2 = random.randint(0, vertexes - 1)
+            while v1 == v2:
+                v2 = random.randint(0, vertexes - 1)
+            self.addEdge(v1, v2)
+        self.printAdjacencyMatrix()
 
     def addEdge(self, v1, v2):
         if v1 == v2:
