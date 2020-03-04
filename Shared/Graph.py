@@ -17,6 +17,22 @@ class Graph(object):
             self.addEdge(v1, v2)
         self.printAdjacencyMatrix()
 
+    # noinspection PyRedeclaration
+    def __init__(self, vertexes: int, probability: float):
+        self.adjMatrix = []
+        for i in range(vertexes):
+            self.adjMatrix.append([0 for i in range(vertexes)])
+        self.size = vertexes
+        for v1 in range(vertexes):
+            for v2 in range(vertexes):
+                if v1 == v2:
+                    continue
+                elif random.random() < probability:
+                    self.addEdge(v1, v2)
+                else:
+                    continue
+        self.printAdjacencyMatrix()
+
     def addEdge(self, v1, v2):
         if v1 == v2:
             print("Already exists")
