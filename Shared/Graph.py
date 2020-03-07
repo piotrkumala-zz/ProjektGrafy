@@ -20,7 +20,6 @@ class Graph(object):
                 v2 = random.randint(0, vertexes - 1)
             self.addEdge(v1, v2)
         self.printAdjacencyMatrix()
-
     # noinspection PyRedeclaration
     def __init__(self, vertexes: int, probability: float):
         """Create a random graph with given params and print it's adjacency matrix
@@ -40,7 +39,6 @@ class Graph(object):
                 else:
                     continue
         self.printAdjacencyMatrix()
-
     def addEdge(self, v1, v2):
         """Create an edge between graph's two vertexes
         :param v1: first vertex
