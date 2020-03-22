@@ -1,5 +1,9 @@
+from functools import partial
 import tkinter as tk
+import tkinter.filedialog
 import math
+from Shared.Converter import list_to_adj
+from Shared.Converter import inc_to_adj
 
 r_graph = 200
 r_circle = 25
@@ -11,6 +15,42 @@ graph_width_center = graph_width / 2
 root = tk.Tk()
 root.geometry('600x600')
 canvas = tk.Canvas(root, height=graph_height, width=graph_width, bg="white")
+
+
+def read_adj(graph, event=None):
+    file = tk.filedialog.askopenfile(parent=root, mode='r')
+    if file is not None and file.mode == 'r':
+        lines = file.readlines()
+        lines = [list(line.replace('\n', '').split()) for line in lines]
+        graph.change_adj_matrix(lines)
+        draw_graph(graph)
+        file.close()
+
+
+def read_inc(graph, event=None):
+    file = tk.filedialog.askopenfile(parent=root, mode='r')
+    if file is not None and file.mode == 'r':
+        lines = file.readlines()
+        lines = [line.replace('\n', '') for line in lines]
+        lines = [list(map(lambda x: int(x), line.split())) for line in lines]
+        graph_ajc = inc_to_adj(lines)
+        graph.change_adj_matrix(graph_ajc)
+        draw_graph(graph)
+        file.close()
+
+
+def read_list(graph, event=None):
+    file = tk.filedialog.askopenfile(parent=root, mode='r')
+    if file is not None and file.mode == 'r':
+        lines = file.readlines()
+        for elem in ['.', '\n']:
+            lines = [line.replace(elem, '') for line in lines]
+        lines = [list(map(lambda x: int(x), line.split())) for line in lines]
+        lines = [line[1:] for line in lines]
+        graph_adj = list_to_adj(lines)
+        graph.change_adj_matrix(graph_adj)
+        draw_graph(graph)
+        file.close()
 
 
 def create_circle(canvas, x, y, r):
@@ -41,5 +81,11 @@ def draw_graph(graph):
         create_circle(canvas, x_circle, y_circle, r_circle)
         canvas.create_text(x_circle, y_circle, text=i + 1)
 
+    b_adj = tk.Button(root, text="Wczytaj jako macierz sąsiedztwa", command=partial(read_adj, graph))
+    b_inc = tk.Button(root, text="Wczytaj jako macierz incydencji", command=partial(read_inc, graph))
+    b_list = tk.Button(root, text="Wczytaj jako lista sąsiedztwa", command=partial(read_list, graph))
+    b_adj.pack()
+    b_inc.pack()
+    b_list.pack()
     canvas.pack()
     root.mainloop()
