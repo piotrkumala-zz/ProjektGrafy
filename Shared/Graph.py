@@ -39,6 +39,10 @@ class Graph(object):
                 else:
                     continue
         self.printAdjacencyMatrix()
+
+    def change_adj_matrix(self, new_adj_matrix: list):
+        self.adjMatrix = new_adj_matrix
+
     def addEdge(self, v1, v2):
         """Create an edge between graph's two vertexes
         :param v1: first vertex
