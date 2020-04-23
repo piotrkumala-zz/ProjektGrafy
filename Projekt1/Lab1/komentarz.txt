@@ -1,0 +1,5 @@
+Program poprawiony:
+
+graphy.py - przy generowaniu krawędzi z prawdopodobieństwem, dla każej krawędzi prawodpodobieństwo było sprawdzane dwa razy(zły zakres iterowania.)
+przy generowaniu określonej ilości krawędzi generowały się krawędzie wielokrotne.
+Oba błędy poprawione. 
