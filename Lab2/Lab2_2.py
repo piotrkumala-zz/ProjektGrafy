@@ -1,8 +1,7 @@
 from Shared.Graph import Graph
 import random
 
-example_graph = Graph(6, 0.25)
-
+example_graph = Graph(10, 0.5,1)
 
 class Edge:
     def __init__(self, start, end):
@@ -46,5 +45,6 @@ def randomize(graph: Graph, n: int):
             graph.adjMatrix[end][start] = 1
 
 
-randomize(example_graph, 1)
-print(example_graph.adjMatrix)
+randomize(example_graph, 100000)
+print('\n\n')
+example_graph.printAdjacencyMatrix()

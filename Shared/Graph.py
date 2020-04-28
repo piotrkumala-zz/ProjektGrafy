@@ -85,3 +85,9 @@ class Graph(object):
             for val in row:
                 print("%d " % val, end='')
             print("")
+
+    def level(self):
+        return len(self.adjMatrix)
+
+    def checkNeighbors(self,v1:int, v2:int):
+        return self.adjMatrix[v1][v2]
