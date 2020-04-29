@@ -79,7 +79,7 @@ def draw_graph(graph):
             neighbour_id += 1
 
         create_circle(canvas, x_circle, y_circle, r_circle)
-        canvas.create_text(x_circle, y_circle, text=i + 1)
+        canvas.create_text(x_circle, y_circle, text=i)
 
     b_adj = tk.Button(root, text="Wczytaj jako macierz sąsiedztwa", command=partial(read_adj, graph))
     b_inc = tk.Button(root, text="Wczytaj jako macierz incydencji", command=partial(read_inc, graph))
