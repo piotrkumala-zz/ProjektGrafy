@@ -14,7 +14,7 @@ def CheckSeries(a: [], n: int):
             return False
         else:
             i = 1
-            while i < a[0]:
+            while i <= a[0]:
                 a[i] -= 1
                 i += 1
             a[0] = 0
