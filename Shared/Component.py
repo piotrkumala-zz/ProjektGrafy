@@ -18,7 +18,6 @@ def Components(graph: Shared.Graph.Graph):
             nr+=1
             comp[i]=nr
             ComponentsR(i,nr,comp,graph)
-    printComponent(comp)
     return comp
 
 

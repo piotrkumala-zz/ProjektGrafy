@@ -21,7 +21,7 @@ class Graph(object):
                         self.addEdge(v1, v2)
                     else:
                         continue
-            self.printAdjacencyMatrix()
+            #self.printAdjacencyMatrix()
         else:
             """ Create a random graph with given params and print it's adjacency matrix
                     :param vertexes: number of vertexes in graph
@@ -38,7 +38,7 @@ class Graph(object):
                     v2 = random.randint(0, vertexes - 1)
                     v1 = random.randint(0, vertexes - 1)
                 self.addEdge(v1, v2)
-            self.printAdjacencyMatrix()
+            #self.printAdjacencyMatrix()
 
     def change_adj_matrix(self, new_adj_matrix: list):
         self.adjMatrix = new_adj_matrix
