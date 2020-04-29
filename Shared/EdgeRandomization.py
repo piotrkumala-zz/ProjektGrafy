@@ -11,7 +11,7 @@ class Edge:
         return hash((self.start, self.end))
 
     def __eq__(self, other):
-        return (self.start, self.end) == (other.start, other.end)
+        return self.start == other.start and self.end == other.end
 
 
 def randomize(graph: Graph, n: int):
@@ -29,7 +29,9 @@ def randomize(graph: Graph, n: int):
     while i < n:
         x, y = random.randint(0, len(edges) - 1), random.randint(0, len(edges) - 1)
         nodes = [edges[x].start, edges[x].end, edges[y].start, edges[y].end]
-        if len(nodes) == len(set(nodes)):
+        edge_1 = Edge(edges[x].start, edges[y].end)
+        edge_2 = Edge(edges[y].start, edges[x].end)
+        if edge_1 not in edges and edge_2 not in edges and len(nodes) == len(set(nodes)):
             edges[x].end, edges[y].end = edges[y].end, edges[x].end
             i += 1
 
