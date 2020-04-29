@@ -1,50 +1,14 @@
 from Shared.Graph import Graph
-import random
+from Shared.EdgeRandomization import randomize
+from Shared.Generator import GenerateGraph
 
-example_graph = Graph(10, 0.5,1)
+example_graph = Graph(5, 0.5, 1)
+series = [7, 5, 5, 5, 3, 3, 2, 1, 1, 0]
+output = GenerateGraph(series, len(series))
+example_graph.change_adj_matrix(output.adjMatrix)
 
-class Edge:
-    def __init__(self, start, end):
-        self.start = start
-        self.end = end
+example_graph.printAdjacencyMatrix()
+print("\n")
 
-    def __hash__(self):
-        return hash((self.start, self.end))
-
-    def __eq__(self, other):
-        return (self.start, self.end) == (other.start, other.end)
-
-
-def randomize(graph: Graph, n: int):
-    edges = []
-    for i in range(len(graph.adjMatrix)):
-        for j in range(i):
-            if graph.adjMatrix[i][j] == 1:
-                xx = Edge(i, j)
-                edges.append(xx)
-
-    # ab, cd -> ad, cb
-    for i in range(n):
-        x, y = random.randint(0, len(edges) - 1), random.randint(0, len(edges) - 1)
-        a = edges[x].start
-        b = edges[x].end
-        c = edges[y].start
-        d = edges[y].end
-        edges[x].end = d
-        edges[y].end = b
-
-    for i in range(len(graph.adjMatrix)):
-        for j in range(len(graph.adjMatrix)):
-            graph.adjMatrix[i][j] = 0
-
-    for val in edges:
-        start = val.start
-        end = val.end
-        if start != end:
-            graph.adjMatrix[start][end] = 1
-            graph.adjMatrix[end][start] = 1
-
-
-randomize(example_graph, 100000)
-print('\n\n')
+randomize(example_graph, 10)
 example_graph.printAdjacencyMatrix()
