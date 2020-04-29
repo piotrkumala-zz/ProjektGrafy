@@ -33,3 +33,8 @@ def GenerateGraph(a: [], n: int):
                             b[j], b[j + 1] = b[j + 1], b[j]
     else:
         return False
+def GenerateKGraph(n:int, k:int):
+    a = list()
+    for i in range(n):
+        a.append(k)
+    return GenerateGraph(a,n)
