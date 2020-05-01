@@ -26,3 +26,17 @@ def ComponentsR(i: int,nr: int,comp,graph: Shared.Graph.Graph):
         if graph.checkNeighbors(i,j) and comp[j]==-1:
             comp[j]=nr
             ComponentsR(j,nr,comp,graph)
+
+
+def is_one_coherent_component(comp):
+    num_pow = 0
+    for i in range(1, len(comp)):
+        vertices = 0
+        for j in range(len(comp)):
+            if comp[j] == i:
+                vertices += 1
+        if vertices != 0:
+            num_pow += 1
+    if num_pow == 1:
+        return True
+    return False

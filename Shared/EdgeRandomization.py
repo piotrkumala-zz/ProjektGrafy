@@ -1,20 +1,9 @@
 from Shared.Graph import Graph
+from Shared.Edge import Edge
 import random
 
 
-class Edge:
-    def __init__(self, start, end):
-        self.start = start
-        self.end = end
-
-    def __hash__(self):
-        return hash((self.start, self.end))
-
-    def __eq__(self, other):
-        return self.start == other.start and self.end == other.end
-
-
-def randomize(graph: Graph, n: int):
+def randomize(graph: Graph, n: int = 1):
     edges = []
 
     # check if edge
@@ -45,4 +34,3 @@ def randomize(graph: Graph, n: int):
         end = val.end
         graph.adjMatrix[start][end] = 1
         graph.adjMatrix[end][start] = 1
-

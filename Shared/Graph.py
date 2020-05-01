@@ -1,11 +1,13 @@
 import random
 from Shared.Converter import list_to_adj
 from Shared.Converter import inc_to_adj
+from Shared.Edge import Edge
 
 
 class Graph(object):
     # noinspection PyRedeclaration
     def __init__(self, vertexes: int = 4, probability: float = 1, prob: int = 1):
+        self.edges = []
         if prob == 1:
             """Create a random graph with given params and print it's adjacency matrix
             :param vertexes: number of vertexes in graph
@@ -116,3 +118,11 @@ class Graph(object):
             lines = [line[1:] for line in lines]
             graph_adj = list_to_adj(lines)
             self.change_adj_matrix(graph_adj)
+
+    def add_weight_to_edges(self):
+        for i in range(0, len(self.adjMatrix)):
+            for j in range(0, i):
+                if self.adjMatrix[i][j] == 1:
+                    new_edge = Edge(i, j, random.randint(1, 10))
+                    self.edges.append(new_edge)
+
