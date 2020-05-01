@@ -1,9 +1,11 @@
 import random
+from Shared.Converter import list_to_adj
+from Shared.Converter import inc_to_adj
 
 
 class Graph(object):
     # noinspection PyRedeclaration
-    def __init__(self, vertexes: int, probability: float,prob: int):
+    def __init__(self, vertexes: int = 4, probability: float = 1, prob: int = 1):
         if prob == 1:
             """Create a random graph with given params and print it's adjacency matrix
             :param vertexes: number of vertexes in graph
@@ -14,14 +16,13 @@ class Graph(object):
                 self.adjMatrix.append([0 for i in range(vertexes)])
             self.size = vertexes
             for v1 in range(vertexes):
-                for v2 in range(v1,vertexes):
+                for v2 in range(v1, vertexes):
                     if v1 == v2:
                         continue
                     elif random.random() < probability:
                         self.addEdge(v1, v2)
                     else:
                         continue
-            #self.printAdjacencyMatrix()
         else:
             """ Create a random graph with given params and print it's adjacency matrix
                     :param vertexes: number of vertexes in graph
@@ -32,13 +33,12 @@ class Graph(object):
                 self.adjMatrix.append([0 for i in range(vertexes)])
             self.size = vertexes
             for i in range(probability):
-                v1=0
-                v2=0
-                while v1 == v2 or self.containsEdge(v1,v2):
+                v1 = 0
+                v2 = 0
+                while v1 == v2 or self.containsEdge(v1, v2):
                     v2 = random.randint(0, vertexes - 1)
                     v1 = random.randint(0, vertexes - 1)
                 self.addEdge(v1, v2)
-            #self.printAdjacencyMatrix()
 
     def change_adj_matrix(self, new_adj_matrix: list):
         self.adjMatrix = new_adj_matrix
@@ -89,5 +89,30 @@ class Graph(object):
     def level(self):
         return len(self.adjMatrix)
 
-    def checkNeighbors(self,v1:int, v2:int):
+    def checkNeighbors(self, v1: int, v2: int):
         return self.adjMatrix[v1][v2]
+
+    def read_adj(self, file_name):
+        with open(file_name) as file:
+            lines = file.readlines()
+            lines = [list(line.replace('\n', '').split()) for line in lines]
+            print(lines)
+            self.change_adj_matrix(lines)
+
+    def read_inc(self, file_name):
+        with open(file_name) as file:
+            lines = file.readlines()
+            lines = [line.replace('\n', '') for line in lines]
+            lines = [list(map(lambda x: int(x), line.split())) for line in lines]
+            graph_ajc = inc_to_adj(lines)
+            self.change_adj_matrix(graph_ajc)
+
+    def read_list(self, file_name):
+        with open(file_name) as file:
+            lines = file.readlines()
+            for elem in ['.', '\n']:
+                lines = [line.replace(elem, '') for line in lines]
+            lines = [list(map(lambda x: int(x), line.split())) for line in lines]
+            lines = [line[1:] for line in lines]
+            graph_adj = list_to_adj(lines)
+            self.change_adj_matrix(graph_adj)
