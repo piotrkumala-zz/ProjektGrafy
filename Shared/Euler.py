@@ -19,15 +19,32 @@ def generateEuler(n:int):
 def EulerRec(graph: Shared.Graph.Graph, v:int):
     toReturn =f'{v+1}, '
     for i in range(len(graph.adjMatrix)):
-        if graph.adjMatrix[v][i]==1:
+        if graph.adjMatrix[v][i]==1 and checkComponent(graph,v,i):
             graph.adjMatrix[v][i]=0
             graph.adjMatrix[i][v]=0
             toReturn+=EulerRec(graph,i)
+            break
+    else:
+        for i in range(len(graph.adjMatrix)):
+            if graph.adjMatrix[v][i] == 1:
+                graph.adjMatrix[v][i] = 0
+                graph.adjMatrix[i][v] = 0
+                toReturn += EulerRec(graph, i)
+                break
     return toReturn
 
 def findEuler(graph):
     eulerGraph=copy.deepcopy(graph)
     return (EulerRec(eulerGraph,0))
 
-
+def checkComponent(graph,v,i):
+    n = sum(Shared.Component.Components(graph))
+    graph.adjMatrix[v][i] = 0
+    graph.adjMatrix[i][v] = 0
+    m = sum(Shared.Component.Components(graph))
+    graph.adjMatrix[v][i] = 1
+    graph.adjMatrix[i][v] = 1
+    if n==m:
+        return True
+    return False
 
