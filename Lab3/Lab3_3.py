@@ -1,8 +1,8 @@
-import Shared.Graph
-from Shared.DistanceMatrix import DistanceMatrix
+from Shared.CoherentGraph import get_coherent_graph
+from Shared.DistanceMatrix import distanceMatrix
+from Shared.drawMatrix import drawMatrix
 
 
 
-
-graph = Shared.Graph.Graph(10,0.5,1)
-print(DistanceMatrix(graph))
+graph = get_coherent_graph(10, 0.5)
+drawMatrix(distanceMatrix(graph))
