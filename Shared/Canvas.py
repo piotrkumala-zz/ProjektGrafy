@@ -76,13 +76,27 @@ def draw_graph(graph):
                 x_neighbour = graph_height_center + r_graph * math.sin(angle_neighbour)
                 y_neighbour = graph_width_center - r_graph * math.cos(angle_neighbour)
                 canvas.create_line(x_circle, y_circle, x_neighbour, y_neighbour)
-                canvas.create_rectangle(abs(x_circle+x_neighbour)/2,abs(y_circle+y_neighbour)/2,abs(x_circle+x_neighbour)/2+20,abs(y_circle+y_neighbour)/2+20,fill="yellow")
-                canvas.create_text(abs(x_circle+x_neighbour)/2+10,abs(y_circle+y_neighbour)/2+10,text=str(graph.values[i][neighbour_id]))
 
             neighbour_id += 1
 
         create_circle(canvas, x_circle, y_circle, r_circle)
         canvas.create_text(x_circle, y_circle, text=i)
+
+    for i in range(len(graph.adjMatrix)):
+        angle_circle = i * diff_angle
+        x_circle = graph_height_center + r_graph * math.sin(angle_circle)
+        y_circle = graph_width_center - r_graph * math.cos(angle_circle)
+        neighbour_id = 0
+
+        # create edges
+        for neighbour in graph.adjMatrix[i]:
+            if neighbour_id > i and int(neighbour)>0:
+                angle_neighbour = diff_angle * neighbour_id
+                x_neighbour = graph_height_center + r_graph * math.sin(angle_neighbour)
+                y_neighbour = graph_width_center - r_graph * math.cos(angle_neighbour)
+                canvas.create_rectangle(abs(x_circle+x_neighbour)/2,abs(y_circle+y_neighbour)/2,abs(x_circle+x_neighbour)/2+20,abs(y_circle+y_neighbour)/2+20,fill="yellow")
+                canvas.create_text(abs(x_circle+x_neighbour)/2+10,abs(y_circle+y_neighbour)/2+10,text=str(graph.values[i][neighbour_id]))
+            neighbour_id += 1
 
     # b_adj = tk.Button(root, text="Wczytaj jako macierz sąsiedztwa", command=partial(read_adj, graph))
     # b_inc = tk.Button(root, text="Wczytaj jako macierz incydencji", command=partial(read_inc, graph))
