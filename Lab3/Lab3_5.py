@@ -8,7 +8,7 @@ nodes = 10
 probability = 0.5
 start_graph = get_coherent_graph(nodes, probability)
 
-out = get_minimum_spanning_tree(start_graph, nodes)
+out = get_minimum_spanning_tree(start_graph)
 
 for edge in out.edges:
     print(edge)

@@ -4,20 +4,15 @@ from Shared.Edge import Edge
 from Shared.Graph import Graph
 
 
-def get_minimum_spanning_tree(start_graph: Graph, nodes:int):
-    starts = list()
-    print("start graph edges:")
-    for edge in start_graph.edges:
-        starts.append(edge.start)
-        print(edge)
+def get_minimum_spanning_tree(start_graph: Graph):
 
     print("minimum spanning tree edges")
-    start = starts[random.randint(0, len(starts) - 1)]
+    start = random.randint(0, start_graph.size)
     vertexes = list()
     vertexes.append(start)
     out = Graph(start_graph.size, 0, 0)
     potential_edges = list()
-    while len(out.edges) < out.size:
+    while len(vertexes) < out.size:
         for edge in start_graph.edges:
             if len(out.edges) == 0 and (edge.start == start or edge.end == start):
                 potential_edges.append(edge)
@@ -39,6 +34,5 @@ def get_minimum_spanning_tree(start_graph: Graph, nodes:int):
         for edge in start_graph.edges:
             if edge.start in vertexes and edge.end in vertexes:
                 start_graph.edges.remove(edge)
-        # start_graph.edges.remove(potential_edges[0])
         potential_edges.clear()
     return out
