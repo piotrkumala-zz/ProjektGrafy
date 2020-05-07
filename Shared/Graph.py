@@ -14,6 +14,7 @@ class Graph(object):
             :param probability:  probability that two vertexes are connected
             """
             self.adjMatrix = []
+            self.values = [[0 for _ in range(vertexes)] for _ in range(vertexes)]
             for i in range(vertexes):
                 self.adjMatrix.append([0 for i in range(vertexes)])
             self.size = vertexes
@@ -124,5 +125,7 @@ class Graph(object):
             for j in range(0, i):
                 if self.adjMatrix[i][j] == 1:
                     new_edge = Edge(i, j, random.randint(1, 10))
+                    self.values[i][j] = new_edge.weight
+                    self.values[j][i] = new_edge.weight
                     self.edges.append(new_edge)
 

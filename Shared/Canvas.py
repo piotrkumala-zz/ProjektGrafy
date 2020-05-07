@@ -71,11 +71,14 @@ def draw_graph(graph):
 
         # create edges
         for neighbour in graph.adjMatrix[i]:
-            if neighbour_id > i and int(neighbour) is 1:
+            if neighbour_id > i and int(neighbour)>0:
                 angle_neighbour = diff_angle * neighbour_id
                 x_neighbour = graph_height_center + r_graph * math.sin(angle_neighbour)
                 y_neighbour = graph_width_center - r_graph * math.cos(angle_neighbour)
                 canvas.create_line(x_circle, y_circle, x_neighbour, y_neighbour)
+                canvas.create_rectangle(abs(x_circle+x_neighbour)/2,abs(y_circle+y_neighbour)/2,abs(x_circle+x_neighbour)/2+20,abs(y_circle+y_neighbour)/2+20,fill="yellow")
+                canvas.create_text(abs(x_circle+x_neighbour)/2+10,abs(y_circle+y_neighbour)/2+10,text=str(graph.values[i][neighbour_id]))
+
             neighbour_id += 1
 
         create_circle(canvas, x_circle, y_circle, r_circle)

@@ -12,6 +12,5 @@ miniMax=findMiniMax(graph)
 print("")
 print(f"centrum:{centrum+1}")
 print(f"miniMax:{miniMax+1}")
-
-
+draw_graph(graph)
 
