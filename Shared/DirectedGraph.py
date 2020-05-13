@@ -48,3 +48,6 @@ class DirectedGraph:
                 else:
                     print("%d " % val, end='')
             print("")
+
+    def get_neighbours(self, node):
+        return self.list[node]
