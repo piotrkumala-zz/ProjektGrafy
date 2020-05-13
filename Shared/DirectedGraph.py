@@ -12,7 +12,7 @@ class DirectedGraph:
             self.adjMatrix.append([0 for i in range(vertexes)])
             self.list.append([])
             self.incMatrix.append([])
-            self.Values.append([0 for i in range(vertexes)])
+            self.Values.append([None for i in range(vertexes)])
         for i in range(vertexes):
             for j in range(vertexes):
                 if i == j:
@@ -58,6 +58,8 @@ class DirectedGraph:
                 if self.Values[i][j] == 1:
                     randomised = random.randrange(fromValue,toValue)
                     self.Values[i][j] = randomised
+        for i in range(len(self.Values)):
+            self.Values[i][i]=0
 
     def level(self):
         return len(self.Values)

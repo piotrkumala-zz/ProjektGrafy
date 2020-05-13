@@ -6,7 +6,7 @@ def johnson(graph:DirectedGraph):
     newGraph=copy.deepcopy(graph)
     num=newGraph.add_verticle()
     for i in range(newGraph.level()-1):
-        newGraph.add_edge(i,num)
+        newGraph.add_edge(num,i)
     d,p=bellman_ford(newGraph,num)
     print(d,p)
     h=[None for _ in range(newGraph.level())]
@@ -14,8 +14,8 @@ def johnson(graph:DirectedGraph):
         h[i]=d[i]
     for i in range(graph.level()):
         for j in range(i,graph.level()):
-            if graph.Values[i][j] != 0:
-               graph.Values[i][j]+=h[i]-h[j]
+            if graph.adjMatrix[i][j] != 0:
+               graph.Values[i][j]+=h[j]-h[i]
     D=[[dijkstra(graph,i,j) -h[i]+h[j] for j in range(graph.level())]for i in range(graph.level())]
     return D
 
@@ -26,9 +26,10 @@ from Shared.Converter import adj_to_list
 
 
 def get_neighbours(graph, node_id: int):
-    all_neighbours_list = adj_to_list(graph.adjMatrix)
-    node_neighbours_list = all_neighbours_list[node_id]
-    node_neighbours_list = list(map(lambda x: x - 1, node_neighbours_list))
+    node_neighbours_list=[]
+    for i in range(graph.level()):
+        if graph.adjMatrix[node_id][i]==1:
+            node_neighbours_list.append(i)
     return node_neighbours_list
 
 
@@ -68,7 +69,8 @@ def dijkstra(graph, start: int, end: int):
         path.append(current)
         dist = shortest_paths[current][0]
         if dist is not None:
-            sum_weight += get_edge_weight(graph, current, dist)
+            if(get_edge_weight(graph, current, dist) is not None):
+                sum_weight += get_edge_weight(graph, current, dist)
         current = dist
 
     path = path[::-1]
