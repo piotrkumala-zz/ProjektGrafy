@@ -8,14 +8,13 @@ def johnson(graph:DirectedGraph):
     for i in range(newGraph.level()-1):
         newGraph.add_edge(num,i)
     d,p=bellman_ford(newGraph,num)
-    print(d,p)
     h=[None for _ in range(newGraph.level())]
     for i in range(newGraph.level()):
         h[i]=d[i]
     for i in range(graph.level()):
         for j in range(i,graph.level()):
             if graph.adjMatrix[i][j] != 0:
-               graph.Values[i][j]+=h[j]-h[i]
+               graph.Values[i][j]+=h[i]-h[j]
     D=[[dijkstra(graph,i,j) -h[i]+h[j] for j in range(graph.level())]for i in range(graph.level())]
     return D
 
@@ -69,8 +68,7 @@ def dijkstra(graph, start: int, end: int):
         path.append(current)
         dist = shortest_paths[current][0]
         if dist is not None:
-            if(get_edge_weight(graph, current, dist) is not None):
-                sum_weight += get_edge_weight(graph, current, dist)
+                sum_weight += get_edge_weight(graph, dist, current)
         current = dist
 
     path = path[::-1]

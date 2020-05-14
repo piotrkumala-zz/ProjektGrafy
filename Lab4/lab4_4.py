@@ -4,7 +4,7 @@ from Shared.Johnson import johnson
 from Shared.drawMatrix import drawMatrix
 
 graph=connectedDirectedGraph(3, 0.5)
-graph.randomiseValues(-1, 10)
+graph.randomiseValues(-2, 10)
 drawMatrix(graph.Values)
 print(johnson(graph))
 draw_directed(graph)
