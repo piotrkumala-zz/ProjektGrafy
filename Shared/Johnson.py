@@ -14,8 +14,8 @@ def johnson(graph:DirectedGraph):
     for i in range(graph.level()):
         for j in range(i,graph.level()):
             if graph.adjMatrix[i][j] != 0:
-               graph.Values[i][j]+=h[i]-h[j]
-    D=[[dijkstra(graph,i,j) -h[i]+h[j] for j in range(graph.level())]for i in range(graph.level())]
+               graph.Values[i][j]+=h[j]-h[i]
+    D=[[dijkstra(graph,i,j) -h[j]+h[i] for j in range(graph.level())]for i in range(graph.level())]
     return D
 
 
