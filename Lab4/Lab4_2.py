@@ -1,7 +1,7 @@
 from Shared.DirectedGraph import DirectedGraph
 from Shared.Kosaraju import kosaraju
-
-g = DirectedGraph(5, 0.5)
+from Shared.Canvas import draw_directed
+g = DirectedGraph(10, 0.2)
 g.print_list()
 
 result = kosaraju(g)
@@ -11,5 +11,6 @@ for i in set(result):
     all_paths.append([index for index, value in enumerate(result) if value == i])
 
 for i in range(len(all_paths)):
-    print(f"Sciezka {i + 1}: {all_paths[i]}")
+    print(f"Składowa {i + 1}: {all_paths[i]}")
 
+draw_directed(g)

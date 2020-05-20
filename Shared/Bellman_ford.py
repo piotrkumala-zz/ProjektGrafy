@@ -18,5 +18,5 @@ def bellman_ford(graph: DirectedGraph,start:int):
             if graph.adjMatrix[i][j] != 0:
                 if d[j]>d[i]+graph.Values[i][j]:
                     print("ujemny cykl wykryty")
-                    return False
+                    return False, False
     return d, p

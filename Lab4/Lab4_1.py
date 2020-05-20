@@ -1,5 +1,5 @@
 from Shared.DirectedGraph import DirectedGraph
-
+from Shared.drawMatrix import drawMatrix
 g = DirectedGraph(9, 0.5)
 print('Adjacency list:')
 g.print_list()

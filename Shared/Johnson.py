@@ -8,6 +8,8 @@ def johnson(graph:DirectedGraph):
     for i in range(newGraph.level()-1):
         newGraph.add_edge(num,i)
     d,p=bellman_ford(newGraph,num)
+    if d is False:
+        return False
     h=[None for _ in range(newGraph.level())]
     for i in range(newGraph.level()):
         h[i]=d[i]
